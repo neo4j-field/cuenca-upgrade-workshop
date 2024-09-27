@@ -1,0 +1,13 @@
+networks:
+  cluster_net:
+
+name: cuenca_app
+
+services:
+  app:
+    hostname: app
+    build: ./app
+    networks:
+      - cluster_net
+    ports:
+      - 8080:8080
