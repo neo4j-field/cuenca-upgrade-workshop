@@ -1,12 +1,12 @@
 // schema
-CREATE CONSTRAINT line_url IF NOT EXISTS FOR (l:BusLine) REQUIRE l.url IS NODE KEY;
-CREATE CONSTRAINT stop_url IF NOT EXISTS FOR (s:BusStop) REQUIRE s.url IS NODE KEY;
+CREATE CONSTRAINT line_url IF NOT EXISTS ON (l:BusLine) ASSERT l.url IS NODE KEY;
+CREATE CONSTRAINT stop_url IF NOT EXISTS ON (s:BusStop) ASSERT s.url IS NODE KEY;
 
 //load lines
 LOAD CSV WITH HEADERS FROM 'file:///bus_lines.csv' AS row
 MERGE (line:BusLine { url: row.url })
 ON CREATE
-    SET line.lineNo = toInteger(row.lineNo),
+    SET line.lineNo = row.lineNo,
         line.direction = row.direction,
         line.from = row.from,
         line.to = row.to;
@@ -32,4 +32,5 @@ RETURN count(stop) as stops;
 //model enrichment
 MATCH (prev:BusStop)<-[prev_r:HAS_STOP]-(l:BusLine)-[next_r:HAS_STOP]->(next:BusStop) 
     WHERE next_r.index = prev_r.index + 1
-CREATE (prev)-[:NEXT_STOP {line:l.lineNo}]->(next);
+    AND EXISTS(l.direction)
+MERGE (prev)-[:NEXT_STOP {line:l.lineNo, direction: l.direction}]->(next);

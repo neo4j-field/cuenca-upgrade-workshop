@@ -1,5 +1,8 @@
+#!/usr/bin/env bash
+SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
+
 docker run --interactive --tty --rm \
-    --volume=./scripts:/scripts \
+    --volume=${SCRIPT_DIR}:/scripts \
     --env NEO4J_ACCEPT_LICENSE_AGREEMENT=yes \
     --network=cuenca_db_cluster_net  \
     neo4j/neo4j-admin:4.4.37-enterprise \
