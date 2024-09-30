@@ -28,6 +28,7 @@ tmp/*
 
 #build targets
 plugin/target/*
+!plugin/target/custom-1.0.0.jar
 app/target/*
 
 #IDEA files
