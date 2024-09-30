@@ -35,3 +35,9 @@ app/target/*
 app/.idea/*
 plugin/.idea/*
 .idea/*
+
+#backup files
+backups/*
+
+#config files
+data/conf_v4/*
