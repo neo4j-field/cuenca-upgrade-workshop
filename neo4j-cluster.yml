@@ -33,7 +33,7 @@ services:
       NEO4J_metrics_bolt_messages_enabled: false
       NEO4J_metrics_cypher_replanning_enabled: true
       NEO4J_dbms_logs_query_rotation_size: 5MiB
-      NEO4J_logs_query_rotation_keep__number: 5
+      NEO4J_dbms_logs_query_rotation_keep__number: 5
   
   neo4j2:
     # image: neo4j-custom:latest
