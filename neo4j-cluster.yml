@@ -28,6 +28,8 @@ services:
       NEO4J_dbms_routing_default__router: SERVER
       NEO4J_dbms_security_procedures_unrestricted: apoc.*,custom.*
       NEO4J_apoc_export_file_enabled: true
+      NEO4J_dbms_logs_query_format: JSON
+      NEO4J_internal_dbms_logs_query_deprecation__notifications_enabled: true
   
   neo4j2:
     # image: neo4j-custom:latest
