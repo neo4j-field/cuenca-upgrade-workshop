@@ -16,6 +16,7 @@ services:
       - 17687:7687
     volumes: &volumes
       - ./data:/var/lib/neo4j/import
+      - ./backups:/backups
     environment: &env
       NEO4J_AUTH: neo4j/changeme
       NEO4J_ACCEPT_LICENSE_AGREEMENT: yes
