@@ -29,7 +29,17 @@ public class Main {
     @Description("Get the bus stops on the given line.")
     public Stream<Stop> getLineStops(@Name("lineUrl") String url) {
         log.infoLogger().log("call to getLineStops with argument: "+url);
-        Node line = tx.findNode(Label.label("BusLine"), "url", url);
+        Node line;
+        try{
+            line = tx.findNode(Label.label("BusLine"), "url", url);
+        } catch (MultipleFoundException e){
+            log.errorLogger().log("Too many lines found");
+            return Stream.empty();
+        }
+        if (line == null) {
+            log.errorLogger().log("Line not found");
+            return Stream.empty();
+        }
         List<Node> stops = new ArrayList<>();
         Iterable<Relationship> relationships = line.getRelationships(Direction.OUTGOING, RelationshipType.withName("HAS_STOP"));
         relationships.iterator()
