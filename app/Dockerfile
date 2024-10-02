@@ -1,5 +1,5 @@
 # Use a Maven image to build the project
-FROM maven:3.9.9-eclipse-temurin-11 AS build
+FROM maven:3.9.9-eclipse-temurin-17-alpine AS build
 
 WORKDIR /app
 
@@ -15,7 +15,7 @@ RUN mvn clean package -DskipTests
 
 
 # use a minimal JDK image to run the application
-FROM eclipse-temurin:11-jre-alpine
+FROM eclipse-temurin:17-jre-alpine
 
 WORKDIR /app
 
