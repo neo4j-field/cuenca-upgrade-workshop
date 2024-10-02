@@ -19,10 +19,13 @@ class DemoRepository {
     }
 
     Stream<Stop> getLineStops(URI lineUri) {
-        return driver.executableQuery("CALL custom.getLineStops($url)")
-                .withParameters(Map.of("url", lineUri.toString()))
-                .execute().records().stream()
-                .map(this::stopMapper);
+        return driver.session().readTransaction(tx ->
+                tx.run("CALL custom.getLineStops($url)", Map.of("url", lineUri.toString()))
+                        .stream()
+                        .map(this::stopMapper)
+                        .toList()
+                        .stream()
+        );
     }
 
     private Stop stopMapper(Record record) {

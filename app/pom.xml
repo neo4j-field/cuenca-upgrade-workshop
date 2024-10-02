@@ -5,7 +5,10 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>3.3.4</version>
+		<!-- This is the newest Spring boot version that comes with the neo4j 5 driver -->
+		<!--		<version>3.3.4</version>-->
+		<!-- This is the previous Spring boot version that comes with the neo4j 4 driver -->
+		<version>2.7.18</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>org.neo4j.upgrade</groupId>
