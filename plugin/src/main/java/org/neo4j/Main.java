@@ -28,6 +28,7 @@ public class Main {
     @Procedure(name = "custom.getLineStops", mode = Mode.READ)
     @Description("Get the bus stops on the given line.")
     public Stream<Stop> getLineStops(@Name("lineUrl") String url) {
+        log.infoLogger().log("call to getLineStops with argument: "+url);
         Node line = tx.findNode(Label.label("BusLine"), "url", url);
         List<Node> stops = new ArrayList<>();
         Iterable<Relationship> relationships = line.getRelationships(Direction.OUTGOING, RelationshipType.withName("HAS_STOP"));
