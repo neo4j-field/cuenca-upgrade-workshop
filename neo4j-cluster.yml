@@ -39,7 +39,7 @@ services:
   neo4j2:
     image: neo4j-custom:4.4
     hostname: neo4j2
-    build: *build
+    # build: *build
     networks: *networks
     ports:
       - 27474:7474
@@ -52,7 +52,7 @@ services:
   neo4j3:
     image: neo4j-custom:4.4
     hostname: neo4j3
-    build: *build
+    # build: *build
     networks: *networks
     ports:
       - 37474:7474
@@ -65,7 +65,7 @@ services:
   neo4j4:
     image: neo4j-custom:4.4
     hostname: neo4j4
-    build: *build
+    # build: *build
     networks: *networks
     ports:
       - 47474:7474

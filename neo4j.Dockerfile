@@ -22,16 +22,16 @@ FROM neo4j:4.4.37-enterprise
 
 USER neo4j
 
-# Install custom plugin
-# COPY --from=build /plugin/target/custom-1.0.0.jar plugins/custom-1.0.0.jar
-
-# Copy externally built custom plugin
-COPY plugin/target/custom-1.0.0.jar plugins/custom-1.0.0.jar
-
-
 # Install APOC plugin
 ENV NEO4J_APOC_VERSION='4.4.0.31'
-RUN wget -O "plugins/apoc-$NEO4J_APOC_VERSION-all.jar" "https://github.com/neo4j-contrib/neo4j-apoc-procedures/releases/download/$NEO4J_APOC_VERSION/apoc-$NEO4J_APOC_VERSION-all.jar"
+COPY apoc/apoc-$NEO4J_APOC_VERSION-all.jar plugins/
+# RUN wget -O "plugins/${APOC_JAR}" "https://github.com/neo4j-contrib/neo4j-apoc-procedures/releases/download/$NEO4J_APOC_VERSION/$APOC_JAR"
+
+
+# Install custom plugin
+# COPY --from=build /plugin/target/custom-1.0.0.jar plugins/custom-1.0.0.jar
+# Copy externally built custom plugin
+COPY plugin/target/custom-1.0.0.jar plugins/
 
 
 COPY scripts ./scripts
