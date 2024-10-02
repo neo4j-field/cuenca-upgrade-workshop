@@ -13,4 +13,4 @@ services:
     ports:
       - 8080:8080
     environment:
-      - SPRING_NEO4J_URI=neo4j://neo4j1
+      - SPRING_NEO4J_URI=neo4j://host.docker.internal:17687
