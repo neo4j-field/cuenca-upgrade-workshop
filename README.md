@@ -1,11 +1,11 @@
 # cuenca-upgrade-workshop
 
-##setup
+## setup
 
-Deploy the Neo4j cluster:
+Deploy the whole application:
 
 ```
-docker compose -f neo4j-cluster.yml up
+docker compose -f deployment.yml up
 ```
 
 
@@ -15,15 +15,19 @@ Load initial data:
 ./scripts/load_data.sh
 ```
 
-Run the app:
+Run only the app:
 
 ```
-TBD
-docker compose -f app/app.yml up
+docker compose -f deployment.yml --profile app  up
 ```
 
-or `mvn run`
+or `mvn spring-boot:run` to run locally.
 
+Run only the db:
+
+```
+docker compose -f deployment.yml --profile db  up
+```
 
 ## Goals
 
