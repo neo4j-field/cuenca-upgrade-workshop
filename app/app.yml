@@ -6,6 +6,7 @@ name: cuenca_app
 services:
   app:
     hostname: app
+    image: bus-app:1.0
     build: ./
     networks:
       - cluster_net
