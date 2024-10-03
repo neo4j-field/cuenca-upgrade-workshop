@@ -18,5 +18,5 @@ mvn spring-boot:run
 curl http://localhost:8080/
 ```
 ```bash
-curl http://localhost:8080/bus/route/43/stops
+curl http://localhost:8080/bus/route/43/stops?direction=outbound
 ```
