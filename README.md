@@ -1,32 +1,78 @@
 # cuenca-upgrade-workshop
 
-## setup
 
-Deploy the whole application:
+During this exercise, you'll need to migrate a solution from Neo4j 4 to Neo4j 5.
 
+
+This solution is composed of:
+
+- a Neo4j database deployed on a cluster (3 primaries + 1 secondary)
+- data loading scripts
+- a Neo4j custom plugin
+- a Spring boot based application
+
+## Preparation work / pre-requisites
+
+1. Install required software:
+
+- Java 11 AND Java 17
+- Maven
+- A decent IDE
+- Docker environment such as docker desktop (ask IT)
+  or [colima](https://mvmn.wordpress.com/2023/10/26/switching-from-docker-desktop-to-colima-on-macos/)
+
+2. Download the maven dependencies of the example application, as this can take a while:
+
+```bash
+./scripts/download-dependencies.sh
 ```
+
+3. Deploy the Neo4j cluster as described below, to download the docker images
+
+## Setup
+
+Deploy the whole solution (database + app):
+
+```bash
 docker compose -f deployment.yml up
 ```
 
+### Deploy only the Neo4j cluster
 
-Load initial data:
-
+```bash
+docker compose -f deployment.yml --profile db up
 ```
+
+### Load initial data
+
+```bash
 ./scripts/load_data.sh
 ```
 
-Run only the app:
+### Run the example app
+
+Different options here:
+
+- Build and run with maven (recommended)
+
+```bash
+cd app && mvn spring-boot:run
+```
+
+- Build and run in a docker container
 
 ```
 docker compose -f deployment.yml --profile app  up
 ```
 
-or `mvn spring-boot:run` to run locally.
+You can now access the application using these 2 endpoints:
 
-Run only the db:
-
+```bash
+curl http://localhost:8080/
 ```
-docker compose -f deployment.yml --profile db  up
+
+```bash
+curl http://localhost:8080/bus/route/43/stops?direction=outbound
 ```
 
 ## Goals

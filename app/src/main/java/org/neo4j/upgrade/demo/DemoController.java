@@ -18,12 +18,12 @@ public class DemoController {
     }
 
     @GetMapping("/")
-    public String index() {
-        return "Greetings from Spring Boot!";
+    public Stream<BusLine> index() {
+        return demoRepository.listAllLinesWithFirstStop();
     }
 
     @GetMapping("/bus/route/{routeId}/stops")
-    public Stream<Stop> foo(@PathVariable int routeId, @RequestParam String direction) {
+    public Stream<BusStop> foo(@PathVariable int routeId, @RequestParam String direction) {
         URI lineUri = URI.create("https://tfl.gov.uk/bus/route/" + routeId + "?direction=" + direction);
         return demoRepository.getLineStops(lineUri);
     }
