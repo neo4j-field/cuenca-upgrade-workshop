@@ -1,8 +1,8 @@
 # cuenca-upgrade-workshop
 
+
 During this exercise, you'll need to migrate a solution from Neo4j 4 to Neo4j 5.
 
-Then, the customer willing to
 
 This solution is composed of:
 
@@ -31,10 +31,16 @@ This solution is composed of:
 
 ## Setup
 
-### Deploy the Neo4j cluster
+Deploy the whole solution (database + app):
 
 ```bash
-docker compose -f neo4j-cluster.yml up
+docker compose -f deployment.yml up
+```
+
+### Deploy only the Neo4j cluster
+
+```bash
+docker compose -f deployment.yml --profile db up
 ```
 
 ### Load initial data
@@ -45,7 +51,7 @@ docker compose -f neo4j-cluster.yml up
 
 ### Run the example app
 
-Different options here
+Different options here:
 
 - Build and run with maven (recommended)
 
@@ -55,8 +61,8 @@ cd app && mvn spring-boot:run
 
 - Build and run in a docker container
 
-```bash
-docker compose -f app/app.yml up
+```
+docker compose -f deployment.yml --profile app  up
 ```
 
 You can now access the application using these 2 endpoints:

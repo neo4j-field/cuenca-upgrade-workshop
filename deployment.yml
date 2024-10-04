@@ -1,7 +1,7 @@
 networks:
   cluster_net:
 
-name: cuenca_db
+name: tfl_buses
 
 services:
   neo4j1:
@@ -17,6 +17,7 @@ services:
     volumes: &volumes
       - ./data:/var/lib/neo4j/import
       - ./backups:/backups
+    profiles: [db]
     environment: &env
       NEO4J_AUTH: neo4j/changeme
       NEO4J_ACCEPT_LICENSE_AGREEMENT: yes
@@ -45,6 +46,7 @@ services:
       - 27474:7474
       - 27687:7687
     volumes: *volumes
+    profiles: [db]
     environment:
       <<: *env
       NEO4J_dbms_connector_bolt_advertised__address: localhost:27687
@@ -58,6 +60,7 @@ services:
       - 37474:7474
       - 37687:7687
     volumes: *volumes
+    profiles: [db]
     environment:
       <<: *env
       NEO4J_dbms_connector_bolt_advertised__address: localhost:37687
@@ -72,8 +75,21 @@ services:
       - 47687:7687
       - 46362:6362
     volumes: *volumes
+    profiles: [db]
     environment:
       <<: *env
       NEO4J_dbms_mode: READ_REPLICA
       NEO4J_dbms_connector_bolt_advertised__address: localhost:47687
       NEO4J_dbms_backup_listen__address: neo4j4:6362
+
+
+  app:
+    hostname: app
+    image: bus-app:1.0
+    build: ./app
+    networks: *networks
+    ports:
+      - 8080:8080
+    profiles: [app]
+    environment:
+      - SPRING_NEO4J_URI=neo4j://neo4j1:7687
