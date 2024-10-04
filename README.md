@@ -21,7 +21,7 @@ This solution is composed of:
 - Docker environment such as docker desktop (ask IT)
   or [colima](https://mvmn.wordpress.com/2023/10/26/switching-from-docker-desktop-to-colima-on-macos/)
 
-2. Download the maven dependencies of the example application, as this can take a while:
+2. Download the maven & docker dependencies of the solution, as this can take a while:
 
 ```bash
 ./scripts/download-dependencies.sh
