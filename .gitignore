@@ -29,6 +29,7 @@ tmp/*
 plugin/target/*
 !plugin/target/custom-1.0.0.jar
 app/target/*
+!app/target/demo-0.0.1.jar
 
 #IDEA files
 app/.idea/*
