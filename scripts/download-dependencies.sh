@@ -23,7 +23,13 @@ mvn dependency:go-offline
 sed -i '' 's/<neo4j.version>4.4.37<\/neo4j.version>/<neo4j.version>5.23.0<\/neo4j.version>/' pom.xml
 mvn dependency:go-offline
 
-docker_images=("neo4j:4.4.37-enterprise" "neo4j:5.23.0-enterprise" "eclipse-temurin:17-jre-alpine")
+if [[ "$(uname -m)" == arm* || "$(uname -m)" == aarch64 ]]; then
+    docker_images=("neo4j:4.4.37-enterprise" "neo4j:5.23.0-enterprise" "arm64v8/eclipse-temurin:17-jre")
+else
+    docker_images=("neo4j:4.4.37-enterprise" "neo4j:5.23.0-enterprise" "eclipse-temurin:17-jre-alpine")
+fi
+
+
 for image in "${docker_images[@]}"; do
   docker pull "$image"
 done
