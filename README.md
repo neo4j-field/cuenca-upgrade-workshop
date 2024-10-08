@@ -37,6 +37,8 @@ Deploy the whole solution (database + app):
 docker compose -f deployment.yml --profile "*" up
 ```
 
+ARM cpu users : change docker image in `/app/Dockerfile` from `eclipse-temurin:17-jre-alpine` to `eclipse-temurin:17-jre-alpine`
+
 ### Deploy only the Neo4j cluster
 
 ```bash
