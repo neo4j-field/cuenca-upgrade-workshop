@@ -34,7 +34,7 @@ This solution is composed of:
 Deploy the whole solution (database + app):
 
 ```bash
-docker compose -f deployment.yml up
+docker compose -f deployment.yml --profile "*" up
 ```
 
 ### Deploy only the Neo4j cluster
